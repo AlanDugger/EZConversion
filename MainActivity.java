@@ -171,8 +171,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length() > 0) {
-                    inputAmount = Double.parseDouble(inputText.getText().toString());
-                    checkConversion(inputAmount, firstUnitType, secondUnitType);
+                    try{
+                        inputAmount = Double.valueOf(inputText.getText().toString());
+                        checkConversion(inputAmount, firstUnitType, secondUnitType);
+                    }  catch (NumberFormatException ex){
+                        // Disregard, should only occur if they start a decimal with . instead of 0
+                    }
+
+
                 }else{
                     convertedText.setText("");
                 }
